@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fafaf9;
+  --card: #ffffff;
+  --text: #1c1917;
+  --muted: #78716c;
+  --border: #e7e5e4;
+  --accent: #f97316;
+}
+
+.dark {
+  --bg: #0f0e0d;
+  --card: #1c1917;
+  --text: #fafaf9;
+  --muted: #a8a29e;
+  --border: #292524;
+  --accent: #fb923c;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* Card base */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Animated gradient bg for hero */
+.hero-bg {
+  background: radial-gradient(ellipse at top left, #fff7ed 0%, transparent 60%),
+              radial-gradient(ellipse at bottom right, #ffedd5 0%, transparent 60%);
+}
+.dark .hero-bg {
+  background: radial-gradient(ellipse at top left, #1c0a00 0%, transparent 60%),
+              radial-gradient(ellipse at bottom right, #0f0800 0%, transparent 60%);
+}
+
+/* Loading shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--border) 25%, var(--card) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
