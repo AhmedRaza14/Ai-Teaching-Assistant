@@ -1,14 +1,8 @@
-'use client';
-
 export async function extractTextFromPDF(file: File): Promise<string> {
-  // Dynamically import pdfjs
   const pdfjsLib = await import('pdfjs-dist');
 
-  // ✅ Use local worker bundled with Next.js — avoids CDN fetch error
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
-    import.meta.url
-  ).toString();
+  // ✅ Version 3.x ka sahi worker path
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
   const arrayBuffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -25,7 +19,7 @@ export async function extractTextFromPDF(file: File): Promise<string> {
   }
 
   if (!fullText.trim()) {
-    throw new Error('PDF se text nahi nikla. Ye scanned/image PDF ho sakta hai.');
+    throw new Error('PDF se text nahi nikla. Scanned/image PDF ho sakta hai.');
   }
 
   return fullText.trim().slice(0, 15000);
